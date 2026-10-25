@@ -1,26 +1,34 @@
 # dsh-opencodego-usage
 
+[![npm](https://img.shields.io/npm/v/@jamolpe88/dsh-opencodego-usage?style=flat-square&logo=npm&label=npm)](https://www.npmjs.com/package/@jamolpe88/dsh-opencodego-usage)
+[![GitHub release](https://img.shields.io/github/v/release/JaMoLpE88/dsh-opencodego-usage?style=flat-square&logo=github&label=release)](https://github.com/JaMoLpE88/dsh-opencodego-usage/releases)
+[![licencia](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
+[![DSH](https://img.shields.io/badge/DSH-%3E%3D0.2.1--rc.3-4B8BBE?style=flat-square)](#compatibilidad)
+[![plataforma](https://img.shields.io/badge/platform-Windows%2011-0078D6?style=flat-square)](#compatibilidad)
+[![dsh-plugin.org](https://dsh-plugin.org/badges/listed.svg)](https://dsh-plugin.org/plugins/jamolpe88/dsh-opencodego-usage)
+
 **Uso de la suscripción OpenCode Go en el composer de DeepSeek Harness.** Los tramos de 5 horas, semanal y mensual viven en una píldora compacta entre los controles de permiso y modelo; al pulsarla se abre una ventana de detalles estilo DSH con tiempos de reset, colores y un botón de refresco manual.
 
 Cero configuración. El plugin usa la clave del proveedor OpenCode Go que DSH ya tiene guardada: sin cookie, sin workspace ID y sin página de ajustes.
 
-[English](README.md)
+**English** → [README.md](README.md)
 
-[![npm](https://img.shields.io/npm/v/@jamolpe88/dsh-opencodego-usage.svg)](https://www.npmjs.com/package/@jamolpe88/dsh-opencodego-usage)
-[![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+**Página del proyecto** → [jmolo.es/proyectos/dsh-opencodego-usage](https://jmolo.es/proyectos/dsh-opencodego-usage/)
 
-![Píldora de uso en el composer](assets/usage-pill.png)
+![Ventana de detalles de uso de OpenCode Go sobre el composer de DeepSeek Harness](https://jmolo.es/proyectos/dsh-opencodego-usage/usage-panel.png)
 
-![Detalles de uso de OpenCode Go](assets/usage-panel.png)
+*La ventana de detalles: un porcentaje, una barra fina y una cuenta atrás local por tramo, seguidas de última actualización, cadencia de auto-refresco, origen y refresco manual. El fondo del chat está difuminado por privacidad.*
 
-*Capturas tomadas en DSH Desktop sobre Windows 11. El fondo del chat está difuminado; los porcentajes son los de la suscripción del autor.*
+![Píldora de uso de OpenCode Go en el composer de DeepSeek Harness](https://jmolo.es/proyectos/dsh-opencodego-usage/usage-pill.png)
+
+*La píldora compacta: el logo de OpenCode y tres anillos estilo contexto separados por `·`. Está entre el control de permiso y el selector de modelo y solo aparece con un modelo de OpenCode Go.*
 
 ## Qué hace
 
 - Muestra los tres tramos de OpenCode Go en una sola píldora compacta: **5 horas**, **semanal** y **mensual**.
 - Usa los mismos anillos estilo contexto que el medidor de contexto de DSH, con separadores `·` entre ventanas.
 - Colorea el anillo y la barra según la severidad: verde por debajo del 50 %, ámbar del 50 % al 74 % y rojo del 75 % al 100 % (un tramo limitado siempre aparece en rojo).
-- Abre al pulsar una ventana de detalles con aspecto nativo: porcentaje, barra fina, cuenta atrás del reset, hora local del reset, última actualización, cadencia de auto-refresco, origen de los datos y botón **Refresh**.
+- Abre al pulsar una ventana de detalles con aspecto nativo: porcentaje, barra fina, cuenta atrás del reset, hora local, última actualización, cadencia de auto-refresco, origen de los datos y botón **Refresh**.
 - La cuenta atrás baja cada segundo mientras la ventana está abierta. Cuando un reset llega a cero, hace una lectura automática para resetear la ventana sin que el usuario haga nada.
 - Refresca los porcentajes cada 60 segundos y al volver a la ventana de la aplicación.
 - Solo aparece mientras el modelo activo pertenece al proveedor `opencode-go`. Con otros proveedores no muestra nada.
@@ -42,7 +50,7 @@ No hay archivo de configuración, ni campo para pegar una clave, ni editor de um
 
 ## Requisitos
 
-- **DSH Desktop** `>= 0.2.1-rc.3` (probado en `0.2.1-rc.3`, Windows 11).
+- **DSH Desktop** `>= 0.2.1-rc.3`, perfil `desktop` (probado en `0.2.1-rc.3`, Windows 11).
 - Un proveedor **OpenCode Go** configurado en **Settings → Models**, con una clave válida.
 - Node 22+ (DSH trae su propio runtime).
 
@@ -107,6 +115,56 @@ Devuelve los tres tramos:
 - La visibilidad usa la proyección viva `modelSelection`. Al cambiar a otro proveedor la píldora desaparece al instante; al volver, reaparece.
 - El Client formatea las horas de reset con la zona horaria y el idioma del navegador, repinta la cuenta atrás cada segundo con la ventana abierta y fuerza una lectura nueva cuando una cuenta atrás llega a cero (con protección para que un reset no provoque un bucle de refrescos).
 
+## Diagnóstico
+
+Con DSH abierto, en la misma URL de la interfaz (el puerto cambia en cada arranque):
+
+```bash
+curl http://127.0.0.1:59863/api/opencodego-usage
+```
+
+Devuelve porcentajes, fechas de reset, un código de error y un indicador de frescura; nunca la clave:
+
+```json
+{
+  "updatedAt": 1793016001120,
+  "windows": {
+    "rolling": { "percent": 4, "resetsAt": 1793025060000, "status": "ok" },
+    "weekly": { "percent": 24, "resetsAt": 1793059200000, "status": "ok" },
+    "monthly": { "percent": 12, "resetsAt": 1794062116000, "status": "ok" }
+  },
+  "error": null,
+  "stale": false
+}
+```
+
+Usa `/api/opencodego-usage/refresh` para saltarte la caché de 55 segundos y forzar una lectura. Cuando `error` no es `null`, `stale` indica si los porcentajes son los últimos buenos o si no hay datos.
+
+## Compatibilidad
+
+| | |
+|---|---|
+| DSH | `>= 0.2.1-rc.3` (única versión probada por el autor) |
+| Node | `>= 22` |
+| SO | Windows 11 (probado); macOS y Linux sin probar |
+| Perfil | `desktop` |
+| Proveedor | OpenCode Go configurado en **Settings → Models** |
+| Catálogo | [publicado en dsh-plugin.org](https://dsh-plugin.org/plugins/jamolpe88/dsh-opencodego-usage) |
+| Página del proyecto | [jmolo.es/proyectos/dsh-opencodego-usage](https://jmolo.es/proyectos/dsh-opencodego-usage/) |
+
+Estado de validación: **probado en Windows 11 con DSH Desktop 0.2.1-rc.3** (2026-10-25). La píldora aparece solo con un modelo de OpenCode Go, la ventana de detalles se abre, las horas locales y las cuentas atrás se actualizan, los colores siguen los umbrales y el refresco manual funciona. El refresco automático al llegar a cero está implementado con una guarda de un solo disparo; queda cubierto por el camino de la cuenta atrás, pero no se observó un reset real durante esta validación.
+
+No validado: macOS, Linux, otras versiones de DSH y el perfil web.
+
+## Límites
+
+- **Windows 11 es la única plataforma probada.** macOS y Linux no están validados.
+- **Solo con OpenCode Go.** Sin ese proveedor no hay dato útil, así que el plugin no renderiza nada.
+- **Sin ajustes.** No hay editor de umbrales, intervalo de refresco, preferencia de ocultación ni campo de clave.
+- **Sin historial ni gráficas.** Solo los tramos actuales y sus resets.
+- **Depende del endpoint de OpenCode.** Si cambia su formato, las ventanas no reconocidas se descartan y la píldora muestra un error `parse`.
+- **No toca el agente.** No añade herramientas, comandos ni proveedores de modelo.
+
 ## Privacidad
 
 - Sin cookies, sin scraping de la sesión del navegador y sin workspace ID.
@@ -132,6 +190,7 @@ Abre la ventana para ver el código y la pista:
 | `no-subscription` | La clave no tiene una suscripción OpenCode Go activa (403). |
 | `rate-limited` | La propia API de uso está limitando peticiones; inténtalo de nuevo en un rato. |
 | `timeout` / `network` | El Host no pudo llegar a `opencode.ai`; reintenta con **Refresh**. |
+| `parse` | La respuesta no traía ventanas reconocibles. |
 
 El plugin no tiene ajustes propios: los problemas del proveedor se resuelven en los ajustes de modelos de DSH.
 

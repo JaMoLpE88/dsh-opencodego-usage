@@ -1,19 +1,27 @@
 # dsh-opencodego-usage
 
+[![npm](https://img.shields.io/npm/v/@jamolpe88/dsh-opencodego-usage?style=flat-square&logo=npm&label=npm)](https://www.npmjs.com/package/@jamolpe88/dsh-opencodego-usage)
+[![GitHub release](https://img.shields.io/github/v/release/JaMoLpE88/dsh-opencodego-usage?style=flat-square&logo=github&label=release)](https://github.com/JaMoLpE88/dsh-opencodego-usage/releases)
+[![license](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
+[![DSH](https://img.shields.io/badge/DSH-%3E%3D0.2.1--rc.3-4B8BBE?style=flat-square)](#compatibility)
+[![platform](https://img.shields.io/badge/platform-Windows%2011-0078D6?style=flat-square)](#compatibility)
+[![dsh-plugin.org](https://dsh-plugin.org/badges/listed.svg)](https://dsh-plugin.org/plugins/jamolpe88/dsh-opencodego-usage)
+
 **OpenCode Go subscription usage in the DeepSeek Harness composer.** The 5-hour, weekly and monthly windows live in a compact pill between the permission and model controls; click it for a DSH-style details dialog with reset countdowns, colors and a manual refresh.
 
 Zero configuration. The plugin uses the OpenCode Go provider key DSH already stores — no cookie, no workspace ID, no settings page.
 
-[Español](README.es.md)
+**Español** → [README.es.md](README.es.md)
 
-[![npm](https://img.shields.io/npm/v/@jamolpe88/dsh-opencodego-usage.svg)](https://www.npmjs.com/package/@jamolpe88/dsh-opencodego-usage)
-[![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+**Project page** → [jmolo.es/proyectos/dsh-opencodego-usage](https://jmolo.es/proyectos/dsh-opencodego-usage/)
 
-![Usage pill in the composer](assets/usage-pill.png)
+![OpenCode Go usage details window over the DeepSeek Harness composer](https://jmolo.es/proyectos/dsh-opencodego-usage/usage-panel.png)
 
-![OpenCode Go usage details](assets/usage-panel.png)
+*The details window: one percentage, one thin progress bar and one local reset countdown per window, followed by last update, auto-refresh cadence, source and a manual refresh. The chat background is blurred for privacy.*
 
-*Screenshots from DSH Desktop on Windows 11. The chat background is blurred; the usage values are from the author's subscription.*
+![OpenCode Go usage pill in the DeepSeek Harness composer](https://jmolo.es/proyectos/dsh-opencodego-usage/usage-pill.png)
+
+*The compact pill: the OpenCode mark and three context-style rings separated by `·`. It sits between the permission control and the model selector and is visible only with an OpenCode Go model.*
 
 ## What it does
 
@@ -42,7 +50,7 @@ There is no plugin config file, no key input, no threshold editor and no refresh
 
 ## Requirements
 
-- **DSH Desktop** `>= 0.2.1-rc.3` (tested on `0.2.1-rc.3`, Windows 11).
+- **DSH Desktop** `>= 0.2.1-rc.3`, profile `desktop` (tested on `0.2.1-rc.3`, Windows 11).
 - An **OpenCode Go** provider configured in **Settings → Models**, with a valid API key.
 - Node 22+ (DSH ships its own runtime).
 
@@ -107,6 +115,56 @@ It returns the three windows:
 - Visibility uses the live `modelSelection` projection. Switching to another provider hides the pill immediately; switching back shows it again.
 - The Client formats reset timestamps with the browser's locale and time zone, re-renders the countdown every second while the dialog is open, and forces a fresh read when a countdown reaches zero (guarded so one reset cannot cause a refresh loop).
 
+## Diagnostics
+
+With DSH running, on the same URL as the interface (the port changes on each start):
+
+```bash
+curl http://127.0.0.1:59863/api/opencodego-usage
+```
+
+It returns percentages, reset timestamps, an error code and a freshness flag — never the key:
+
+```json
+{
+  "updatedAt": 1793016001120,
+  "windows": {
+    "rolling": { "percent": 4, "resetsAt": 1793025060000, "status": "ok" },
+    "weekly": { "percent": 24, "resetsAt": 1793059200000, "status": "ok" },
+    "monthly": { "percent": 12, "resetsAt": 1794062116000, "status": "ok" }
+  },
+  "error": null,
+  "stale": false
+}
+```
+
+Use `/api/opencodego-usage/refresh` to skip the 55-second cache and force a read. When `error` is not `null`, `stale` tells you whether the percentages are the last good values or there are no values at all.
+
+## Compatibility
+
+| | |
+|---|---|
+| DSH | `>= 0.2.1-rc.3` (the only version tested by the author) |
+| Node | `>= 22` |
+| OS | Windows 11 (tested); macOS and Linux untested |
+| Profile | `desktop` |
+| Provider | OpenCode Go configured in **Settings → Models** |
+| Catalog | [listed on dsh-plugin.org](https://dsh-plugin.org/plugins/jamolpe88/dsh-opencodego-usage) |
+| Project page | [jmolo.es/proyectos/dsh-opencodego-usage](https://jmolo.es/proyectos/dsh-opencodego-usage/) |
+
+Validation status: **tested on Windows 11 with DSH Desktop 0.2.1-rc.3** (2026-10-25). The pill appears only with an OpenCode Go model, the details dialog opens, local reset times and countdowns update, the severity colors follow the thresholds, and manual refresh works. The automatic refresh at a reset is implemented with a one-shot guard; it is covered by the countdown path but was not observed during a live reset in this validation.
+
+Not validated: macOS, Linux, other DSH versions, and the web profile.
+
+## Limits
+
+- **Windows 11 is the only tested platform.** macOS and Linux are not validated.
+- **Only with OpenCode Go.** Without that provider there is no useful data, so the plugin renders nothing.
+- **No settings.** No threshold editor, refresh interval, show/hide preference or key input.
+- **No history or charts.** Only the current windows and their resets.
+- **Depends on the OpenCode endpoint.** If its shape changes, unrecognized windows are dropped and the pill reports a `parse` error.
+- **No agent changes.** No tools, commands or model providers are added.
+
 ## Privacy
 
 - No cookies, no browser session scraping, no workspace ID.
@@ -132,6 +190,7 @@ Open the dialog for the code and hint:
 | `no-subscription` | The key has no active OpenCode Go subscription (403). |
 | `rate-limited` | The usage API itself is rate limiting; try again shortly. |
 | `timeout` / `network` | The Host could not reach `opencode.ai`; retry with **Refresh**. |
+| `parse` | The response did not contain recognizable windows. |
 
 The plugin has no settings of its own: provider problems are fixed in DSH's model settings.
 

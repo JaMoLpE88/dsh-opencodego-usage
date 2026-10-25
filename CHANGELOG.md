@@ -2,6 +2,11 @@
 
 All notable changes to `@jamolpe88/dsh-opencodego-usage` are documented here.
 
+## 0.1.1 — 2026-10-25
+
+- README redesigned to match the other JaMoLpE88 DSH plugin: flat-square badges, GitHub and npm links, the jmolo.es project page and cover images, diagnostics, compatibility and limits sections.
+- No runtime changes.
+
 ## 0.1.0 — 2026-10-25
 
 - First release.
