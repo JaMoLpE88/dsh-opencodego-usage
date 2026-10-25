@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "OpenCode Go Usage",
+    "description": "Shows 5-hour, weekly and monthly OpenCode Go subscription usage in the composer. Appears only while an OpenCode Go model is selected; no configuration needed."
+  }
+}
