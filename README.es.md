@@ -32,6 +32,7 @@ Cero configuración. El plugin usa la clave del proveedor OpenCode Go que DSH ya
 - La cuenta atrás baja cada segundo mientras la ventana está abierta. Cuando un reset llega a cero, hace una lectura automática para resetear la ventana sin que el usuario haga nada.
 - Refresca los porcentajes cada 60 segundos y al volver a la ventana de la aplicación.
 - Solo aparece mientras el modelo activo pertenece al proveedor `opencode-go`. Con otros proveedores no muestra nada.
+- Aparece también en una sesión nueva antes del primer mensaje: mientras aún no registra un modelo, la píldora sigue el modelo que muestra el compositor, incluido el predeterminado configurado.
 - No necesita ajustes: la clave que ya tiene DSH es la única credencial.
 
 ## Qué no hace

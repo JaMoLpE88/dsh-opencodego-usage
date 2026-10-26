@@ -297,13 +297,40 @@ window.__ModuleLoader__.load({
       return { view, refreshing, refresh }
     }
 
-    /** Read the live model provider; undefined when the selection is unknown. */
-    function useProvider(useProjection) {
-      if (typeof useProjection !== 'function') return undefined
-      return useProjection('modelSelection', (selection) => {
-        const current = selection?.next ?? selection?.lastUsed
-        return current?.provider
-      })
+    /**
+     * Read the provider of the model the composer shows. A blank Session has no
+     * recorded selection until its first request, so fall back to the effective
+     * default the model control displays for it.
+     */
+    function useProvider(props) {
+      const selected = typeof props.useProjection === 'function'
+        ? props.useProjection('modelSelection', (selection) => (selection?.next ?? selection?.lastUsed)?.provider)
+        : undefined
+      return useDisplayedProvider(props.models, props.sessionId) ?? selected
+    }
+
+    /**
+     * Provider the composer's model control displays: the pending selection, the
+     * used one, or the catalog default a new Session would send with.
+     * @param {unknown} models the DSH model-directories service, when present
+     * @param {string | undefined} sessionId
+     */
+    function useDisplayedProvider(models, sessionId) {
+      const [provider, setProvider] = React.useState(undefined)
+      React.useEffect(() => {
+        setProvider(undefined)
+        if (models === undefined || sessionId === undefined) return
+        let store
+        try {
+          store = models.directoryFor(sessionId).store
+        } catch {
+          return
+        }
+        const read = () => setProvider(store.getSnapshot().current?.provider)
+        read()
+        return store.subscribe(read)
+      }, [models, sessionId])
+      return provider
     }
 
     // -----------------------------------------------------------------------
@@ -507,7 +534,7 @@ window.__ModuleLoader__.load({
     /** The composer pill plus its portaled details dialog. */
     function UsagePill(props) {
       const t = translate(props)
-      const provider = useProvider(props.useProjection)
+      const provider = useProvider(props)
       const active = provider === CREDENTIAL_PROVIDER
       const { view, refreshing, refresh } = useUsage(active)
       const [open, setOpen] = React.useState(false)
@@ -889,6 +916,7 @@ window.__ModuleLoader__.load({
         id: 'opencodego-usage',
         order: 20,
         locale: NS,
+        inject: () => ({ models: ctx.get('modelDirectories') }),
       }, UsagePill)), 'opencodego-usage: composer pill')
     }
 

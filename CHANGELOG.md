@@ -2,6 +2,10 @@
 
 All notable changes to `@jamolpe88/dsh-opencodego-usage` are documented here.
 
+## 0.1.2 — 2026-10-26
+
+- The pill now appears in a new Session's **Into the Unknown** hero before the first prompt. While the Session records no model yet, visibility follows the model the composer displays — the catalog default when no model was picked — instead of waiting for the first request to record one.
+
 ## 0.1.1 — 2026-10-25
 
 - README redesigned to match the other JaMoLpE88 DSH plugin: flat-square badges, GitHub and npm links, the jmolo.es project page and cover images, diagnostics, compatibility and limits sections.

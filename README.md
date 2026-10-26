@@ -32,6 +32,7 @@ Zero configuration. The plugin uses the OpenCode Go provider key DSH already sto
 - Counts down every second while the dialog is open. When a reset reaches zero, it performs an automatic fresh read so the window resets without user action.
 - Refreshes the percentages every 60 seconds and when the app window becomes visible again.
 - Appears only while the active model belongs to the `opencode-go` provider. Other providers show nothing.
+- Appears in a new Session before the first prompt as well: while it records no model yet, the pill follows the model the composer displays, including the configured default.
 - Needs no settings: the provider key DSH already has is the only credential.
 
 ## What it does not do
