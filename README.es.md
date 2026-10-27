@@ -1,6 +1,7 @@
 # dsh-opencodego-usage
 
 [![npm](https://img.shields.io/npm/v/@jamolpe88/dsh-opencodego-usage?style=flat-square&logo=npm&label=npm)](https://www.npmjs.com/package/@jamolpe88/dsh-opencodego-usage)
+[![npm descargas](https://img.shields.io/npm/dm/@jamolpe88/dsh-opencodego-usage?style=flat-square&logo=npm&label=descargas)](https://www.npmjs.com/package/@jamolpe88/dsh-opencodego-usage)
 [![GitHub release](https://img.shields.io/github/v/release/JaMoLpE88/dsh-opencodego-usage?style=flat-square&logo=github&label=release)](https://github.com/JaMoLpE88/dsh-opencodego-usage/releases)
 [![licencia](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
 [![DSH](https://img.shields.io/badge/DSH-%3E%3D0.2.1--rc.3-4B8BBE?style=flat-square)](#compatibilidad)

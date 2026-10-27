@@ -2,6 +2,12 @@
 
 All notable changes to `@jamolpe88/dsh-opencodego-usage` are documented here.
 
+## 0.1.5 — 2026-10-27
+
+- Fixed the centered pill group when a model change adds or removes a pill: a pill that mounted while hidden now joins the group as soon as it becomes visible, so the pills recenter immediately instead of overlapping until the session is reopened.
+- README: added the npm downloads badge.
+- No other runtime changes.
+
 ## 0.1.4 — 2026-10-27
 
 - The pill and the details window now use the same palette as the DeepSeek rate clock: mint `#3EE6A8` for healthy usage, warm amber `#F6C453` from 50 % to 74 % and coral `#FF7A59` from 75 % to 100 %, including the error banner, the stale dot and the rate-limited tag.
