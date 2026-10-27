@@ -2,6 +2,11 @@
 
 All notable changes to `@jamolpe88/dsh-opencodego-usage` are documented here.
 
+## 0.1.4 — 2026-10-27
+
+- The pill and the details window now use the same palette as the DeepSeek rate clock: mint `#3EE6A8` for healthy usage, warm amber `#F6C453` from 50 % to 74 % and coral `#FF7A59` from 75 % to 100 %, including the error banner, the stale dot and the rate-limited tag.
+- README screens updated to the new palette and served from the repository's own assets. Layout, data and behavior unchanged.
+
 ## 0.1.3 — 2026-10-27
 
 - The pill joins the shared centered pill group used by the other JaMoLpE88 composer plugins (DeepSeek balance and DeepSeek rate clock). Several visible pills sit side by side, centered, with a small gap; they hide together when the composer cannot fit them, instead of overlapping the model selector.

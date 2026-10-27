@@ -15,11 +15,11 @@ Cero configuración. El plugin usa la clave del proveedor OpenCode Go que DSH ya
 
 **Página del proyecto** → [jmolo.es/proyectos/dsh-opencodego-usage](https://jmolo.es/proyectos/dsh-opencodego-usage/)
 
-![Ventana de detalles de uso de OpenCode Go sobre el composer de DeepSeek Harness](https://jmolo.es/proyectos/dsh-opencodego-usage/usage-panel.png)
+![Ventana de detalles de uso de OpenCode Go sobre el composer de DeepSeek Harness](assets/usage-panel.png)
 
 *La ventana de detalles: un porcentaje, una barra fina y una cuenta atrás local por tramo, seguidas de última actualización, cadencia de auto-refresco, origen y refresco manual. El fondo del chat está difuminado por privacidad.*
 
-![Píldora de uso de OpenCode Go en el composer de DeepSeek Harness](https://jmolo.es/proyectos/dsh-opencodego-usage/usage-pill.png)
+![Píldora de uso de OpenCode Go en el composer de DeepSeek Harness](assets/usage-pill.png)
 
 *La píldora compacta: el logo de OpenCode y tres anillos estilo contexto separados por `·`. Se une al grupo centrado de píldoras que usan los demás plugins de JaMoLpE88 y solo aparece con un modelo de OpenCode Go; con varias píldoras visibles quedan una al lado de otra, centradas y con un pequeño margen.*
 
@@ -27,7 +27,7 @@ Cero configuración. El plugin usa la clave del proveedor OpenCode Go que DSH ya
 
 - Muestra los tres tramos de OpenCode Go en una sola píldora compacta: **5 horas**, **semanal** y **mensual**.
 - Usa los mismos anillos estilo contexto que el medidor de contexto de DSH, con separadores `·` entre ventanas.
-- Colorea el anillo y la barra según la severidad: verde por debajo del 50 %, ámbar del 50 % al 74 % y rojo del 75 % al 100 % (un tramo limitado siempre aparece en rojo).
+- Colorea el anillo y la barra según la severidad con la misma paleta menta, ámbar y coral que el reloj de tarifas DeepSeek: menta por debajo del 50 %, ámbar del 50 % al 74 % y coral del 75 % al 100 % (un tramo limitado siempre aparece en coral).
 - Abre al pulsar una ventana de detalles con aspecto nativo: porcentaje, barra fina, cuenta atrás del reset, hora local, última actualización, cadencia de auto-refresco, origen de los datos y botón **Refresh**.
 - La cuenta atrás baja cada segundo mientras la ventana está abierta. Cuando un reset llega a cero, hace una lectura automática para resetear la ventana sin que el usuario haga nada.
 - Refresca los porcentajes cada 60 segundos y al volver a la ventana de la aplicación.

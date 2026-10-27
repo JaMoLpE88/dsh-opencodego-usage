@@ -15,11 +15,11 @@ Zero configuration. The plugin uses the OpenCode Go provider key DSH already sto
 
 **Project page** → [jmolo.es/proyectos/dsh-opencodego-usage](https://jmolo.es/proyectos/dsh-opencodego-usage/)
 
-![OpenCode Go usage details window over the DeepSeek Harness composer](https://jmolo.es/proyectos/dsh-opencodego-usage/usage-panel.png)
+![OpenCode Go usage details window over the DeepSeek Harness composer](assets/usage-panel.png)
 
 *The details window: one percentage, one thin progress bar and one local reset countdown per window, followed by last update, auto-refresh cadence, source and a manual refresh. The chat background is blurred for privacy.*
 
-![OpenCode Go usage pill in the DeepSeek Harness composer](https://jmolo.es/proyectos/dsh-opencodego-usage/usage-pill.png)
+![OpenCode Go usage pill in the DeepSeek Harness composer](assets/usage-pill.png)
 
 *The compact pill: the OpenCode mark and three context-style rings separated by `·`. It joins the shared centered pill group used by the other JaMoLpE88 plugins and is visible only with an OpenCode Go model; with several pills visible they sit side by side, centered, with a small gap.*
 
@@ -27,7 +27,7 @@ Zero configuration. The plugin uses the OpenCode Go provider key DSH already sto
 
 - Shows the three OpenCode Go windows in one compact pill: **5-hour**, **weekly** and **monthly**.
 - Uses the same context-style rings as DSH's own context meter, with `·` separators between windows.
-- Colors the ring and bar by severity: green below 50 %, amber from 50 % to 74 %, red from 75 % to 100 % (a rate-limited window is always red).
+- Colors the ring and bar by severity with the same mint, amber and coral palette as the DeepSeek rate clock: mint below 50 %, amber from 50 % to 74 %, coral from 75 % to 100 % (a rate-limited window is always coral).
 - Opens a native-looking details dialog on click: percentage, thin progress bar, reset countdown, local reset time, last update, auto-refresh cadence, data source and a **Refresh** button.
 - Counts down every second while the dialog is open. When a reset reaches zero, it performs an automatic fresh read so the window resets without user action.
 - Refreshes the percentages every 60 seconds and when the app window becomes visible again.

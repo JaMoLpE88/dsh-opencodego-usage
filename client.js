@@ -715,6 +715,13 @@ window.__ModuleLoader__.load({
     // -----------------------------------------------------------------------
 
     const CSS = `
+      [data-ocgo-anchor],
+      .ocgo-panel {
+        --ocgo-ok: #3EE6A8;
+        --ocgo-warn: #F6C453;
+        --ocgo-danger: #FF7A59;
+      }
+
       [data-ocgo-anchor] {
         position: absolute;
         left: 50%;
@@ -804,12 +811,12 @@ window.__ModuleLoader__.load({
         border-radius: 999px;
         flex: none;
       }
-      .ocgo-dot-err { background: var(--dsw-alias-state-error-primary); }
-      .ocgo-dot-warn { background: var(--dsw-alias-state-warn-primary); }
+      .ocgo-dot-err { background: var(--ocgo-danger); }
+      .ocgo-dot-warn { background: var(--ocgo-warn); }
 
-      .ocgo-ok { --ocgo-tint: var(--dsw-alias-state-success-primary, #16a34a); }
-      .ocgo-warn { --ocgo-tint: var(--dsw-alias-state-warn-primary, #d97706); }
-      .ocgo-danger { --ocgo-tint: var(--dsw-alias-state-error-primary, #dc2626); }
+      .ocgo-ok { --ocgo-tint: var(--ocgo-ok); }
+      .ocgo-warn { --ocgo-tint: var(--ocgo-warn); }
+      .ocgo-danger { --ocgo-tint: var(--ocgo-danger); }
       .ocgo-idle { --ocgo-tint: var(--dsw-alias-label-tertiary); }
 
       .ocgo-panel {
@@ -913,8 +920,8 @@ window.__ModuleLoader__.load({
       .ocgo-row-reset svg { flex: none; opacity: .85; }
       .ocgo-reset-clock { color: var(--dsw-alias-label-tertiary); }
       .ocgo-tag {
-        color: var(--dsw-alias-state-error-primary);
-        background: color-mix(in srgb, var(--dsw-alias-state-error-primary) 12%, transparent);
+        color: var(--ocgo-danger);
+        background: color-mix(in srgb, var(--ocgo-danger) 12%, transparent);
         border-radius: 999px;
         padding: 0 6px;
         font-size: 11px;
@@ -945,11 +952,11 @@ window.__ModuleLoader__.load({
         padding: 10px;
         border-radius: var(--dsw-radius-md);
         background: var(--dsw-alias-interactive-bg-hover);
-        background: color-mix(in srgb, var(--dsw-alias-state-error-primary) 8%, transparent);
+        background: color-mix(in srgb, var(--ocgo-danger) 8%, transparent);
       }
       .ocgo-error-icon {
         flex: none;
-        color: var(--dsw-alias-state-error-primary);
+        color: var(--ocgo-danger);
         padding-top: 2px;
       }
       .ocgo-error-copy { min-width: 0; }
