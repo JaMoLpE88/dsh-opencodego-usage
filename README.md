@@ -7,7 +7,7 @@
 [![platform](https://img.shields.io/badge/platform-Windows%2011-0078D6?style=flat-square)](#compatibility)
 [![dsh-plugin.org](https://dsh-plugin.org/badges/listed.svg)](https://dsh-plugin.org/plugins/jamolpe88/dsh-opencodego-usage)
 
-**OpenCode Go subscription usage in the DeepSeek Harness composer.** The 5-hour, weekly and monthly windows live in a compact pill between the permission and model controls; click it for a DSH-style details dialog with reset countdowns, colors and a manual refresh.
+**OpenCode Go subscription usage in the DeepSeek Harness composer.** The 5-hour, weekly and monthly windows live in a compact pill in the composer tool row, inside the shared centered pill group; click it for a DSH-style details dialog with reset countdowns, colors and a manual refresh.
 
 Zero configuration. The plugin uses the OpenCode Go provider key DSH already stores — no cookie, no workspace ID, no settings page.
 
@@ -21,7 +21,7 @@ Zero configuration. The plugin uses the OpenCode Go provider key DSH already sto
 
 ![OpenCode Go usage pill in the DeepSeek Harness composer](https://jmolo.es/proyectos/dsh-opencodego-usage/usage-pill.png)
 
-*The compact pill: the OpenCode mark and three context-style rings separated by `·`. It sits between the permission control and the model selector and is visible only with an OpenCode Go model.*
+*The compact pill: the OpenCode mark and three context-style rings separated by `·`. It joins the shared centered pill group used by the other JaMoLpE88 plugins and is visible only with an OpenCode Go model; with several pills visible they sit side by side, centered, with a small gap.*
 
 ## What it does
 
@@ -34,6 +34,7 @@ Zero configuration. The plugin uses the OpenCode Go provider key DSH already sto
 - Appears only while the active model belongs to the `opencode-go` provider. Other providers show nothing.
 - Appears in a new Session before the first prompt as well: while it records no model yet, the pill follows the model the composer displays, including the configured default.
 - Needs no settings: the provider key DSH already has is the only credential.
+- Joins the centered pill group shared with the other JaMoLpE88 composer plugins: with several pills visible they sit side by side, centered, with a small gap, and hide together when the row is too narrow.
 
 ## What it does not do
 
@@ -82,7 +83,7 @@ Refresh the DSH window after installing. The pill appears in the composer of any
 ## Usage
 
 1. Select a model from the **OpenCode Go** provider.
-2. The pill appears centered in the composer row, between the permission control and the model selector.
+2. The pill appears in the composer row, inside the shared centered pill group; other JaMoLpE88 pills sit beside it with a small gap.
 3. Click it to open the details dialog.
 4. Use **Refresh** for an immediate read; otherwise the plugin refreshes every 60 seconds, when the window becomes visible again, and automatically when a reset reaches zero while the dialog is open.
 
@@ -150,6 +151,7 @@ Use `/api/opencodego-usage/refresh` to skip the 55-second cache and force a read
 | OS | Windows 11 (tested); macOS and Linux untested |
 | Profile | `desktop` |
 | Provider | OpenCode Go configured in **Settings → Models** |
+| Pill group | Shared with the other JaMoLpE88 composer pills (centered, side by side) |
 | Catalog | [listed on dsh-plugin.org](https://dsh-plugin.org/plugins/jamolpe88/dsh-opencodego-usage) |
 | Project page | [jmolo.es/proyectos/dsh-opencodego-usage](https://jmolo.es/proyectos/dsh-opencodego-usage/) |
 
@@ -160,6 +162,7 @@ Not validated: macOS, Linux, other DSH versions, and the web profile.
 ## Limits
 
 - **Windows 11 is the only tested platform.** macOS and Linux are not validated.
+- **Shares the centered pill group.** When the composer cannot fit every visible pill, the group hides together instead of overlapping the model selector.
 - **Only with OpenCode Go.** Without that provider there is no useful data, so the plugin renders nothing.
 - **No settings.** No threshold editor, refresh interval, show/hide preference or key input.
 - **No history or charts.** Only the current windows and their resets.

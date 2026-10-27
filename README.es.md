@@ -7,7 +7,7 @@
 [![plataforma](https://img.shields.io/badge/platform-Windows%2011-0078D6?style=flat-square)](#compatibilidad)
 [![dsh-plugin.org](https://dsh-plugin.org/badges/listed.svg)](https://dsh-plugin.org/plugins/jamolpe88/dsh-opencodego-usage)
 
-**Uso de la suscripción OpenCode Go en el composer de DeepSeek Harness.** Los tramos de 5 horas, semanal y mensual viven en una píldora compacta entre los controles de permiso y modelo; al pulsarla se abre una ventana de detalles estilo DSH con tiempos de reset, colores y un botón de refresco manual.
+**Uso de la suscripción OpenCode Go en el composer de DeepSeek Harness.** Los tramos de 5 horas, semanal y mensual viven en una píldora compacta en la fila del composer, dentro del grupo centrado de píldoras; al pulsarla se abre una ventana de detalles estilo DSH con tiempos de reset, colores y un botón de refresco manual.
 
 Cero configuración. El plugin usa la clave del proveedor OpenCode Go que DSH ya tiene guardada: sin cookie, sin workspace ID y sin página de ajustes.
 
@@ -21,7 +21,7 @@ Cero configuración. El plugin usa la clave del proveedor OpenCode Go que DSH ya
 
 ![Píldora de uso de OpenCode Go en el composer de DeepSeek Harness](https://jmolo.es/proyectos/dsh-opencodego-usage/usage-pill.png)
 
-*La píldora compacta: el logo de OpenCode y tres anillos estilo contexto separados por `·`. Está entre el control de permiso y el selector de modelo y solo aparece con un modelo de OpenCode Go.*
+*La píldora compacta: el logo de OpenCode y tres anillos estilo contexto separados por `·`. Se une al grupo centrado de píldoras que usan los demás plugins de JaMoLpE88 y solo aparece con un modelo de OpenCode Go; con varias píldoras visibles quedan una al lado de otra, centradas y con un pequeño margen.*
 
 ## Qué hace
 
@@ -34,6 +34,7 @@ Cero configuración. El plugin usa la clave del proveedor OpenCode Go que DSH ya
 - Solo aparece mientras el modelo activo pertenece al proveedor `opencode-go`. Con otros proveedores no muestra nada.
 - Aparece también en una sesión nueva antes del primer mensaje: mientras aún no registra un modelo, la píldora sigue el modelo que muestra el compositor, incluido el predeterminado configurado.
 - No necesita ajustes: la clave que ya tiene DSH es la única credencial.
+- Se une al grupo centrado de píldoras compartido con los demás plugins de composer de JaMoLpE88: con varias píldoras visibles quedan una al lado de otra, centradas y con un pequeño margen, y se ocultan juntas cuando la fila se queda sin sitio.
 
 ## Qué no hace
 
@@ -82,7 +83,7 @@ Refresca la ventana de DSH después de instalar. La píldora aparece en el compo
 ## Uso
 
 1. Selecciona un modelo del proveedor **OpenCode Go**.
-2. La píldora aparece centrada en la fila del composer, entre el control de permiso y el selector de modelo.
+2. La píldora aparece en la fila del composer, dentro del grupo centrado de píldoras; las demás píldoras de JaMoLpE88 se colocan a su lado con un pequeño margen.
 3. Púlsala para abrir la ventana de detalles.
 4. Usa **Refresh** para una lectura inmediata; si no, el plugin se actualiza cada 60 segundos, al volver a la ventana y automáticamente cuando un reset llega a cero mientras la ventana está abierta.
 
@@ -150,6 +151,7 @@ Usa `/api/opencodego-usage/refresh` para saltarte la caché de 55 segundos y for
 | SO | Windows 11 (probado); macOS y Linux sin probar |
 | Perfil | `desktop` |
 | Proveedor | OpenCode Go configurado en **Settings → Models** |
+| Grupo de píldoras | Compartido con las demás píldoras de composer de JaMoLpE88 (centradas, una al lado de otra) |
 | Catálogo | [publicado en dsh-plugin.org](https://dsh-plugin.org/plugins/jamolpe88/dsh-opencodego-usage) |
 | Página del proyecto | [jmolo.es/proyectos/dsh-opencodego-usage](https://jmolo.es/proyectos/dsh-opencodego-usage/) |
 
@@ -160,6 +162,7 @@ No validado: macOS, Linux, otras versiones de DSH y el perfil web.
 ## Límites
 
 - **Windows 11 es la única plataforma probada.** macOS y Linux no están validados.
+- **Comparte el grupo centrado de píldoras.** Cuando el composer no puede con todas las píldoras visibles, el grupo se oculta entero en lugar de solaparse con el selector de modelo.
 - **Solo con OpenCode Go.** Sin ese proveedor no hay dato útil, así que el plugin no renderiza nada.
 - **Sin ajustes.** No hay editor de umbrales, intervalo de refresco, preferencia de ocultación ni campo de clave.
 - **Sin historial ni gráficas.** Solo los tramos actuales y sus resets.

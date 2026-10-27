@@ -2,6 +2,11 @@
 
 All notable changes to `@jamolpe88/dsh-opencodego-usage` are documented here.
 
+## 0.1.3 — 2026-10-27
+
+- The pill joins the shared centered pill group used by the other JaMoLpE88 composer plugins (DeepSeek balance and DeepSeek rate clock). Several visible pills sit side by side, centered, with a small gap; they hide together when the composer cannot fit them, instead of overlapping the model selector.
+- README positioning notes updated. No other runtime changes.
+
 ## 0.1.2 — 2026-10-26
 
 - The pill now appears in a new Session's **Into the Unknown** hero before the first prompt. While the Session records no model yet, visibility follows the model the composer displays — the catalog default when no model was picked — instead of waiting for the first request to record one.
